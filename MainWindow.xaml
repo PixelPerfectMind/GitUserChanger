@@ -1,0 +1,86 @@
+﻿<Window x:Class="GitUserChanger.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GitUserChanger"
+        mc:Ignorable="d"
+        Title="Git user changer" Height="360" Width="600" ResizeMode="NoResize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="330*"/>
+            <ColumnDefinition Width="270*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Git user changer" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0" Height="32" Width="174" />
+
+        <!-- 'Direct change' area -->
+        <Grid Grid.ColumnSpan="1" Margin="0,42,0,0">
+            <TextBlock Text="Direct change" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="18" FontWeight="Bold" Margin="10,10,0,0" />
+            <TextBlock Text="Enter your data directly into these fields" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,39,0,0" />
+            <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="10,60,10,0">
+                <TextBlock Text="Git username" />
+                <TextBox x:Name="txt_directUsername" TextWrapping="Wrap" TextChanged="txt_directUsername_TextChanged" />
+                <TextBlock Text="E-Mail adress" Margin="0,5,0,0" />
+                <TextBox x:Name="txt_email" TextWrapping="Wrap" TextChanged="txt_directUsername_TextChanged" />
+                <TextBlock x:Name="txt_error" Text="Name and email must not be empty" FontSize="10" Foreground="Red" Margin="0,10,0,0" Visibility="Collapsed" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                    <Button x:Name="btn_addToList" Content="Save to profile list" Padding="6,4,6,4" Click="btn_addToList_Click" />
+                    <Button x:Name="btn_applyCredentialsDirectly" Content="Apply" Padding="6,4,6,4" Margin="10,0,0,0" Click="btn_applyCredentialsDirectly_Click" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <!-- 'Select user profile from list' area -->
+        <Border Grid.ColumnSpan="1" Grid.Column="2">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                            <RotateTransform Angle="-90" CenterX="0.5" CenterY="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="#02008080"/>
+                    <GradientStop Color="#7C008080" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid Margin="0,42,0,0">
+                <TextBlock Text="Quick change" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="18" FontWeight="Bold" Margin="10,10,0,0" />
+                <TextBlock Text="Select your saved credentials from a list" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,39,0,0" />
+                <ScrollViewer x:Name="scr_list" Margin="10,60,0,0" ScrollChanged="scr_list_ScrollChanged">
+                    <StackPanel x:Name="sp_list" Orientation="Vertical" />
+                </ScrollViewer>
+                <Border x:Name="brdr_fadeOut0" Margin="10,60,17,0" Height="10" VerticalAlignment="Top" >
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="Teal"/>
+                            <GradientStop Color="#00008080" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <Border x:Name="brdr_fadeOut1" Margin="10,0,17,0" Height="10" VerticalAlignment="Bottom" >
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#00008080"/>
+                            <GradientStop Color="Teal" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+            </Grid>
+        </Border>
+
+        <!-- Attribution block -->
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,13,0,0" Grid.Column="1" Height="32" Width="234">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Based on the pubgit-script by:" />
+                <TextBlock x:Name="txt_linkToCredits1" Text="Autism2B2B" Margin="5,0,0,0" Foreground="#FF007CFF" FontWeight="Bold" TextDecorations="Underline" Cursor="Hand" MouseDown="txt_linkToCredits1_MouseDown" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Text="UI by:" />
+                <TextBlock x:Name="txt_linkToCredits2" Text="jonasp2004" Margin="5,0,0,0" Foreground="#FF007CFF" FontWeight="Bold" TextDecorations="Underline" Cursor="Hand" MouseDown="txt_linkToCredits2_MouseDown" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
