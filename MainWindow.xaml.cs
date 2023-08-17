@@ -54,6 +54,7 @@ namespace GitUserChanger {
                             xmlNode.SelectSingleNode("Username").InnerText,
                             xmlNode.SelectSingleNode("Email").InnerText,
                             dateTime,
+                            xmlNode.SelectSingleNode("GPGKey").InnerText,
                             index
                         );
                         userChooserItems.Add(userChooserItem);
@@ -89,6 +90,9 @@ namespace GitUserChanger {
             if(txt_directUsername.Text != "" || txt_email.Text != "") {
                 GitConfigChanger gitConfigChanger = new GitConfigChanger();
                 gitConfigChanger.ChangeCredentials(txt_directUsername.Text, txt_email.Text);
+                if(txt_gpgKey.Text != "") {
+                    gitConfigChanger.ChangeGPGKey(txt_gpgKey.Text);
+                }
             } else {
                 txt_error.Visibility = Visibility.Visible;
             }
@@ -108,16 +112,20 @@ namespace GitUserChanger {
                 XmlElement xmlElementUsername = xmlDocument.CreateElement("Username");
                 XmlElement xmlElementEmail = xmlDocument.CreateElement("Email");
                 XmlElement xmlElementCreatedDate = xmlDocument.CreateElement("CreatedDate");
+                XmlElement xmlElementGPGKey = xmlDocument.CreateElement("GPGKey");
+
 
                 // Set the inner text of the elements
                 xmlElementUsername.InnerText = txt_directUsername.Text;
                 xmlElementEmail.InnerText = txt_email.Text;
                 xmlElementCreatedDate.InnerText = DateTime.Now.ToString();
+                xmlElementGPGKey.InnerText = txt_gpgKey.Text;
 
                 // Add the elements to the xml document
                 xmlElement.AppendChild(xmlElementUsername);
                 xmlElement.AppendChild(xmlElementEmail);
                 xmlElement.AppendChild(xmlElementCreatedDate);
+                xmlElement.AppendChild(xmlElementGPGKey);
                 xmlDocument.SelectSingleNode("Users").AppendChild(xmlElement);
 
                 // Save the xml document
