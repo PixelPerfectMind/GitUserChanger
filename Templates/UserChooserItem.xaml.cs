@@ -10,11 +10,17 @@ namespace GitUserChanger.Templates {
         /// <summary>
         /// Set the username and e-mail adress of the user
         /// </summary>
-        public UserChooserItem(string userName, string eMail, DateTime createdDate, int index) {
+        public UserChooserItem(string userName, string eMail, DateTime createdDate, string key, int index) {
             InitializeComponent();
             txt_userName.Text = userName;
             txt_email.Text = eMail;
             txt_createdDate.Text = "Added: " + createdDate.ToString("dd. MMM. yyyy");
+            if(key != "" || key != null) {
+                txt_gpgKey.Text = key;
+                txt_gpgKey.Visibility = System.Windows.Visibility.Visible;
+            } else {
+                txt_gpgKey.Visibility = System.Windows.Visibility.Hidden;
+            }
             ApplyBackgroundColor(index);
         }
 
@@ -34,6 +40,9 @@ namespace GitUserChanger.Templates {
         private void UserControl_MouseDown(object sender, MouseButtonEventArgs e) {
             GitConfigChanger gitConfigChanger = new GitConfigChanger();
             gitConfigChanger.ChangeCredentials(txt_userName.Text, txt_email.Text);
+            if(txt_gpgKey.Text != "") {
+                gitConfigChanger.ChangeGPGKey(txt_gpgKey.Text);
+            }
         }
     }
 }
