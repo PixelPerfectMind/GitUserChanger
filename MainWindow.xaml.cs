@@ -89,6 +89,9 @@ namespace GitUserChanger {
             if(txt_directUsername.Text != "" || txt_email.Text != "") {
                 GitConfigChanger gitConfigChanger = new GitConfigChanger();
                 gitConfigChanger.ChangeCredentials(txt_directUsername.Text, txt_email.Text);
+                if(txt_gpgKey.Text != "") {
+                    gitConfigChanger.ChangeGPGKey(txt_gpgKey.Text);
+                }
             } else {
                 txt_error.Visibility = Visibility.Visible;
             }
