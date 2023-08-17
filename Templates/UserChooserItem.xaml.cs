@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Xml;
 
 namespace GitUserChanger.Templates {
 
     public partial class UserChooserItem : UserControl {
+
+        public string filePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\GitConfigChanger.xml";
 
         /// <summary>
         /// Set the username and e-mail adress of the user
@@ -42,6 +46,28 @@ namespace GitUserChanger.Templates {
             gitConfigChanger.ChangeCredentials(txt_userName.Text, txt_email.Text);
             if(txt_gpgKey.Text != "") {
                 gitConfigChanger.ChangeGPGKey(txt_gpgKey.Text);
+            }
+        }
+
+        private void btn_delete_Click(object sender, System.Windows.RoutedEventArgs e) {
+            try {
+                // Create the xml document
+                XmlDocument xmlDocument = new XmlDocument();
+                xmlDocument.Load(filePath);
+            
+                // Get the user node
+                XmlNodeList xmlNodeList = xmlDocument.SelectNodes("Users/User");
+                foreach (XmlNode xmlNode in xmlNodeList) {
+                    if (xmlNode.SelectSingleNode("Username").InnerText == txt_userName.Text && xmlNode.SelectSingleNode("Email").InnerText == txt_email.Text) {
+                        xmlNode.ParentNode.RemoveChild(xmlNode);
+                        break;
+                    }
+                }
+                // Save the xml document
+                xmlDocument.Save(filePath);
+                this.Visibility = System.Windows.Visibility.Collapsed;
+            } catch (Exception ex) {
+                MessageBox.Show("An error occured while trying to delete the user.\nError message: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
