@@ -21,5 +21,21 @@ namespace GitUserChanger {
             }
         }
         }
+
+        /// <summary>
+        /// Change the GPG key in the git config file
+        /// </summary>
+        public void ChangeGPGKey(string key) {
+            if (MessageBox.Show("Do you want to apply the GPG key \"" + key + "\" in your git config?", "Apply GPG key", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) {
+                try {
+                    // Run cmd commands
+                    System.Diagnostics.Process.Start("cmd.exe", "/C git config --global user.signingkey \"" + key + "\"");
+                    System.Diagnostics.Process.Start("cmd.exe", "/C git config --global commit.gpgsign true");
+                    MessageBox.Show("The GPG key was applied successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                } catch (Exception ex) {
+                    MessageBox.Show("An error occured while trying to apply the GPG key directly. Please try again later.\n\nError message: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
     }
 }

@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:GitUserChanger.Templates"
              mc:Ignorable="d" MouseDown="UserControl_MouseDown" >
     <Border x:Name="brdr_main">
+      
         <StackPanel Orientation="Horizontal">
             <StackPanel Orientation="Vertical" Margin="5">
                 <TextBlock x:Name="txt_userName" FontSize="16" FontWeight="Bold" />
