@@ -55,9 +55,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Dialogs\GitUserViewer.xaml.cs">
+      <DependentUpon>GitUserViewer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Templates\UserChooserItem.xaml.cs">
       <DependentUpon>UserChooserItem.xaml</DependentUpon>
     </Compile>
+    <Page Include="Dialogs\GitUserViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

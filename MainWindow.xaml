@@ -11,8 +11,20 @@
             <ColumnDefinition Width="330*"/>
             <ColumnDefinition Width="270*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Text="Git user changer" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0" Height="32" Width="174" />
 
+        <!-- Menu bar -->
+        <Menu Padding="5" VerticalAlignment="Top" Background="{x:Null}">
+        <TextBlock Text="Git user changer" FontSize="22" IsEnabled="False" />
+            <MenuItem Header="File" Padding="5" Margin="10,0,0,0">
+                <MenuItem Header="Export .gitconfig file"  />
+                <MenuItem Header="Import .gitconfig file" />
+                <MenuItem Header="Exit" />
+            </MenuItem>
+            <MenuItem Header="View" Padding="5">
+                <MenuItem x:Name="mi_viewGitUser" Header="View current git user" Click="mi_viewGitUser_Click"  />
+            </MenuItem>
+        </Menu>
+        
         <!-- 'Direct change' area -->
         <Grid Grid.ColumnSpan="1" Margin="0,42,0,0">
             <TextBlock Text="Direct change" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="18" FontWeight="Bold" Margin="10,10,0,0" />

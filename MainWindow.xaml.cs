@@ -1,4 +1,5 @@
-﻿using GitUserChanger.Templates;
+﻿using GitUserChanger.Dialogs;
+using GitUserChanger.Templates;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -146,6 +147,11 @@ namespace GitUserChanger {
             } else {
                 brdr_fadeOut1.Visibility = Visibility.Visible;
             }
+        }
+
+        private void mi_viewGitUser_Click(object sender, RoutedEventArgs e) {
+            GitUserViewer gitUserViewer = new GitUserViewer();
+            gitUserViewer.Show();
         }
     }
 }
